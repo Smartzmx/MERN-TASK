@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 
-const Signin = () => {
+const Login = () => {
 
     // State Login
     const[user, setUser] = useState({
-        fullName:'',
         email:'',
-        password:'',
-        passwordConfirm:''
+        password:''
     })
 
     // Desestructuring user
-    const {fullName, email, password, passwordConfirm} = user
+    const {email, password} = user
 
     // Function to handle on change 
     const handleChange = (e) =>{
@@ -25,13 +23,7 @@ const Signin = () => {
     const handleSubmit = (e) =>{
         e.preventDefault()
 
-        // Validate blank info
-
-        //password validation
-
-            //min lenght 6 characteres
-
-            //equal password and password confirm fields
+        // Validate not empty fields
 
         // pasarlo al action???
 
@@ -40,22 +32,11 @@ const Signin = () => {
     return (  
         <div className="form-usuario">
             <div className="contenedor-form sombra-dark">
-                <h1>Crear Cuenta</h1>
+                <h1>Iniciar sesión</h1>
 
                 <form
                     onSubmit={handleSubmit}
                 >
-                    <div className="campo-form">
-                        <label htmlFor="fullName">Nombre Completo</label>
-                        <input
-                            type='text'
-                            id='fullName'
-                            name='fullName'
-                            placeholder='Tu Nombre completo'
-                            onChange={handleChange}
-                            value={fullName}
-                        />    
-                    </div>   
                     <div className="campo-form">
                         <label htmlFor="email">Email</label>
                         <input
@@ -68,7 +49,7 @@ const Signin = () => {
                         />    
                     </div>   
                     <div className="campo-form">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Tu Password</label>
                         <input
                             type='password'
                             id='password'
@@ -78,32 +59,21 @@ const Signin = () => {
                             value={password}
                         />    
                     </div>   
-                    <div className="campo-form">
-                        <label htmlFor="passwordConfirm">Confirma tu Password</label>
-                        <input
-                            type='password'
-                            id='passwordConfirm'
-                            name='passwordConfirm'
-                            placeholder='Confirma tu password'
-                            onChange={handleChange}
-                            value={passwordConfirm}
-                        />    
-                    </div>   
 
                     <div className="campo-form">
                         <input
                             type='submit'
-                            value='Crear Cuenta'
+                            value='Iniciar sesión'
                             onSubmit={handleSubmit}
                             className='btn btn-primario btn-block'
                         />
                     </div>
                 </form>
 
-                <Link to={'/'} className='enlace-cuenta'>Volver a Iniciar sesión</Link>
+                <Link to={'/signin'} className='enlace-cuenta'>Obtener Cuenta</Link>
             </div>
         </div>
     );
 }
  
-export default Signin;
+export default Login;

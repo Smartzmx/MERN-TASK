@@ -1,13 +1,14 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Login from './components/Login'
-import Signin from './components/Signin'
-import Projects from './components/Projects'
+import Login from './components/auth/Login'
+import Signin from './components/auth/Signin'
+import Projects from './components/projects/Projects'
 import ProjectState from './context/projects/ProjectState'
 import TaskState from './context/tasks/TaskState'
 
 function App() {
   return (
+    // vamos a importar el context de proyectos
     <ProjectState>
       <TaskState>
         <Router>

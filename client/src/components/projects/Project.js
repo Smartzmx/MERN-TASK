@@ -1,12 +1,14 @@
 import React, {useContext} from 'react';
-import ProjectContext from '../context/projects/ProjectContext'
-import TaskContext from '../context/tasks/TaskContext'
+import ProjectContext from '../../context/projects/ProjectContext'
+import TaskContext from '../../context/tasks/TaskContext'
 
 const Project = ({projectItem}) => {
 
     //Obtener el state de proyectos
     const projectsContext = useContext(ProjectContext);
-    const { actualProject } = projectsContext
+
+    //Destructuring de projectsContext
+    const { handleProjectSelected } = projectsContext
 
     // Obtener la funcion del context de tarea
     const tasksContext = useContext(TaskContext);
@@ -14,8 +16,8 @@ const Project = ({projectItem}) => {
 
     // Funcion para agregar el proyecto actual 
 
-    const selectProject = id =>{
-        actualProject(id);
+    const selectedProjectFn = id =>{
+        handleProjectSelected(id);
         getTasks(id);
     }
 
@@ -24,7 +26,8 @@ const Project = ({projectItem}) => {
             <button
                 type="button"
                 className="btn btn-blank"
-                onClick={()=> selectProject(projectItem.id) }
+                // siempre que la función tenga algun parametro es necesario llamarla como una callback
+                onClick={()=> selectedProjectFn(projectItem.id) }
             >
                 {projectItem.projectName}
             </button>

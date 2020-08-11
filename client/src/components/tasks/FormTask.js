@@ -1,15 +1,19 @@
 import React, {useContext, useState, useEffect} from 'react';
-import ProjectContext from '../context/projects/ProjectContext'
-import TaskContext from '../context/tasks/TaskContext'
+import ProjectContext from '../../context/projects/ProjectContext'
+import TaskContext from '../../context/tasks/TaskContext'
 
 const FormTask = () => {
 
      //Obtener el state para validar si un proyecto esta activo
-     const projectsContext = useContext(ProjectContext)
-     const { project } = projectsContext
+     const projectsContext = useContext(ProjectContext);
+
+     //Destructuring
+     const { projectSelected } = projectsContext
 
     // Obtener la funcion del context de tarea
     const tasksContext = useContext(TaskContext);
+
+    //Destructuring
     const {selectedTask, taskError, addTasks, validateTask, getTasks, updateTask, cleanTask} = tasksContext;
 
     // UseEffect para actualizar en caso de haber una tarea por editar en el formulario de tareas
@@ -33,10 +37,10 @@ const FormTask = () => {
      const { taskName } = task
 
       // Si no hay ningun proyecto seleccionado
-    if(!project) return null
+    if(!projectSelected) return null
 
     // Array destructuring para extraer el proyecto actual
-    const [actualProject] = project
+    const [selectedProject] = projectSelected
 
     // leer los valores del formulario de tareas
      const handleChange = e =>{
@@ -59,7 +63,7 @@ const FormTask = () => {
         if(selectedTask === null){
              
             // agregar nueva tarea al sate de tareas
-            task.projectId = actualProject.id
+            task.projectId = selectedProject.id
             task.taskState = false
             addTasks(task)
         } else {
@@ -72,7 +76,7 @@ const FormTask = () => {
 
         // Obtener y filtrar las tareas del proyecto actual
 
-        getTasks(actualProject.id)
+        getTasks(selectedProject.id)
 
         // reiniciar el form de tareas
         setTask({

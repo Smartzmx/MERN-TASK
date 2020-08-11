@@ -1,10 +1,12 @@
 import React, { Fragment, useState, useContext } from 'react';
-import ProjectContext from '../context/projects/ProjectContext'
+import ProjectContext from '../../context/projects/ProjectContext'
 
 const NewProject = () => {
 
     //Obtener el state del formulario de proyectos
     const projectsContext = useContext(ProjectContext)
+
+    //Destructuring de projectContext
     const {projectForm, errorForm, handleProjectForm, addNewProject, showError} = projectsContext
 
     // State for Project component
@@ -27,7 +29,7 @@ const NewProject = () => {
     const handleSubmit = (e) =>{
         e.preventDefault()
 
-        // Validar proyecto
+        // Validar nombre del proyecto
         if (projectName === ''){
             showError()
             return
@@ -47,9 +49,10 @@ const NewProject = () => {
             <button
                 type='button'
                 className='btn btn-block btn-primario'
-                onClick={() => handleProjectForm()}
+                onClick={handleProjectForm}
             >Nuevo Proyecto</button>
 
+            {/* Condicional para mostrar u ocultar el formulario de proyectos, en base a si el usuario quiere agregar un nuevo proyecto */}
             { projectForm ? 
                 (
                     <form
@@ -77,7 +80,8 @@ const NewProject = () => {
 
             {errorForm ? 
                 <p className="mensaje error">El nombre del proyecto es obligatorio</p>
-            : null}
+            : null
+            }
         </Fragment>
     );
 }

@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from 'react'
 import Project from './Project'
-import ProjectContext from '../context/projects/ProjectContext'
+import ProjectContext from '../../context/projects/ProjectContext'
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const ProjectList = () => {
 
-    //Destructuring projects del state inicial
+    //Importo el context de proyectos
     const projectsContext = useContext(ProjectContext)
+
+    //Destructuring de projectsContext 
     const {projects, handleProjectList} = projectsContext
 
     // Obtener la lista de proyectos cuando carga el componente, una sola vez

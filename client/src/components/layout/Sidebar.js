@@ -1,6 +1,6 @@
 import React from 'react';
-import NewProject from './NewProject'
-import ProjectList from './ProjectList'
+import NewProject from '../projects/NewProject'
+import ProjectList from '../projects/ProjectList'
 
 const Sidebar = () => {
     return ( 

@@ -1,21 +1,25 @@
 import React, {useContext} from 'react';
-import ProjectContext from '../context/projects/ProjectContext'
-import TaskContext from '../context/tasks/TaskContext'
+import ProjectContext from '../../context/projects/ProjectContext'
+import TaskContext from '../../context/tasks/TaskContext'
 
 const Task = ({task}) => {
 
     //Obtener el proyecto
     const projectsContext = useContext(ProjectContext);
-    const { project } = projectsContext
+
+    //Destructuring
+    const { projectSelected } = projectsContext
 
     // Obtener la funcion del context de tarea
     const tasksContext = useContext(TaskContext);
+
+     //Destructuring
     const {deleteTask, getTasks, changeStateTask, editTask} = tasksContext;
 
     // Funcion eliminar tarea y actualizar tareas
     const handleDeleteTask = id =>{
         deleteTask(id)
-        getTasks(project[0].id)
+        getTasks(projectSelected[0].id)
     }
 
     // Funcion que modifica el estado o estatus de cada tarea

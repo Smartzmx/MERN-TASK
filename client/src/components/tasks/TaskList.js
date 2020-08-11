@@ -1,32 +1,36 @@
 import React, { Fragment, useContext } from 'react';
 import Task from './Task'
-import ProjectContext from '../context/projects/ProjectContext'
-import TaskContext from '../context/tasks/TaskContext'
+import ProjectContext from '../../../src/context/projects/ProjectContext';
+import TaskContext from '../../../src/context/tasks/TaskContext'
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 const TaskList = () => {
 
     //Obtener el state del formulario de proyectos
     const projectsContext = useContext(ProjectContext)
-    const { project, deleteProject } = projectsContext
+
+    //Destructuring 
+    const { projectSelected, deleteProject } = projectsContext
 
      // Obtener las tareas del proyecto
     const tasksContext = useContext(TaskContext);
+
+    //Destructuring
     const { projectTasks } = tasksContext;
 
     // Si no hay ningun proyecto seleccionado
-    if(!project) return <h2>Selecciona un proyecto</h2>
+    if(!projectSelected) return <h2>Selecciona un proyecto</h2>
 
-    // Array destructuring para extraer el proyecto actual
-    const [actualProject] = project
+    // Array destructuring para extraer la posición y todos sus datos del proyecto seleccionado
+    const [selectedProject] = projectSelected
 
     // Eliminar proyecto
     const handleDeleteProject = () =>{
-        deleteProject(actualProject.id)
+        deleteProject(selectedProject.id)
     }
     return ( 
         <Fragment>
-            <h2>Proyecto: {actualProject.projectName} </h2>
+            <h2>Proyecto: {selectedProject.projectName} </h2>
 
             <ul className='listado-tareas'>
                 {projectTasks.length === 0
